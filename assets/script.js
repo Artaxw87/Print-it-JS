@@ -25,21 +25,59 @@ const slides = [
 // console.log(btn);
 
 // document.getElementById("arrow_left").addEventListener("click", function () {
-//   alert("Hello World!");
+//   alert("test1");
 // });
 
 // document.getElementById("arrow_right").addEventListener("click", function () {
-//   console.log("HAHAH");
+//   console.log("test2");
 // });
 
-document.getElementById("arrow_left").addEventListener("click", myFunction);
+/* ------------------- */
+// document.getElementById("arrow_left").addEventListener("click", myFunction);
 
-function myFunction() {
-  console.log("Gauche");
-}
+// function myFunction() {
+//   console.log("Gauche");
+// }
 
-document.getElementById("arrow_right").addEventListener("click", btnRight);
+// document.getElementById("arrow_left").addEventListener("click", btnRight);
 
-function myFunction() {
-  console.log("Droite");
-}
+// function btnRight() {
+//   console.log("Droite");
+// }
+
+// console.log(slides);
+
+// console.log(slides.length);
+
+
+
+
+const prev = document.querySelector(".arrow_left").addEventListener("click", btnLeft);
+
+const next = document.querySelector(".arrow_right").addEventListener("click", btnRight);
+
+let nextElement = document.querySelector('.dot_selected + .dot');
+
+let slideDot = document.querySelector('.dot');
+
+let numberSlides = slides.length;
+
+console.log(numberSlides);
+  
+
+function btnLeft() {
+   console.log("Left");
+ }
+
+ function btnRight() {
+   console.log("Right");
+ }
+
+
+ slideDot.classList.add('dot_selected');
+
+
+//  let boutons = document.getElementsByClassName("dots")
+//  boutons.classList.add("my-class");
+
+
