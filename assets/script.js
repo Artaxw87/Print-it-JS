@@ -49,7 +49,19 @@ const slides = [
 
 // console.log(slides.length);
 
+/*-----------------------------------------------------------*/
 
+// Ajoutez des écouteurs d'événements 
+document.querySelector(".arrow_left").addEventListener("click", btnLeft);
+document.querySelector(".arrow_right").addEventListener("click", btnRight);
+
+let slides = document.querySelectorAll('.slide'); // par exemple
+let numberSlides = slides.length;
+
+let nextElement = document.querySelector('.dot_selected + .dot');
+let slideDot = document.querySelector('.dot');
+
+/*-----------------------------------------------------------*/
 
 
 const prev = document.querySelector(".arrow_left").addEventListener("click", btnLeft);
