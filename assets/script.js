@@ -49,35 +49,48 @@ const slides = [
 
 // console.log(slides.length);
 
+/******************************************************************************************************************************** */
+// const prev = document
+//   .querySelector(".arrow_left")
+//   .addEventListener("click", btnLeft);
 
+// const next = document
+//   .querySelector(".arrow_right")
+//   .addEventListener("click", btnRight);
 
+// let nextElement = document.querySelector(".dot_selected + .dot");
 
-const prev = document.querySelector(".arrow_left").addEventListener("click", btnLeft);
+// let slideDot = document.querySelector(".dot");
 
-const next = document.querySelector(".arrow_right").addEventListener("click", btnRight);
+// let numberSlides = slides.length;
 
-let nextElement = document.querySelector('.dot_selected + .dot');
+// console.log(numberSlides);
 
-let slideDot = document.querySelector('.dot');
+// function btnLeft() {
+//   console.log("Left");
+// }
 
-let numberSlides = slides.length;
+// function btnRight() {
+//   console.log("Right");
+// }
 
-console.log(numberSlides);
-  
+// slideDot.classList.add("dot_selected");
 
-function btnLeft() {
-   console.log("Left");
- }
+let flecheGauche = document.querySelector(".arrow_left");
+let flecheDroite = document.querySelector(".arrow_right");
+let nombreDeSlides = slides.length;
 
- function btnRight() {
-   console.log("Right");
- }
+flecheGauche.addEventListener("click", function () {
+  console.log("Gauche");
+});
 
+flecheDroite.addEventListener("click", function () {
+  console.log("Droite");
+});
 
- slideDot.classList.add('dot_selected');
+flecheGauche.style.cursor = "pointer";
+flecheDroite.style.cursor = "pointer";
 
-
-//  let boutons = document.getElementsByClassName("dots")
-//  boutons.classList.add("my-class");
-
-
+for (let compte = 0; compte < slides.length; compte++) {
+  const ajoutDot = slides[compte];
+}
