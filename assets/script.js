@@ -57,6 +57,21 @@ const slides = [
 // const next = document
 //   .querySelector(".arrow_right")
 //   .addEventListener("click", btnRight);
+=======
+/*-----------------------------------------------------------*/
+
+// Ajoutez des écouteurs d'événements 
+document.querySelector(".arrow_left").addEventListener("click", btnLeft);
+document.querySelector(".arrow_right").addEventListener("click", btnRight);
+
+let slides = document.querySelectorAll('.slide'); // par exemple
+let numberSlides = slides.length;
+
+let nextElement = document.querySelector('.dot_selected + .dot');
+let slideDot = document.querySelector('.dot');
+
+/*-----------------------------------------------------------*/
+>>>>>>> 7d4cf36fee2d70f089a5922a3b5d4602eeab4e99
 
 // let nextElement = document.querySelector(".dot_selected + .dot");
 
@@ -94,3 +109,8 @@ flecheDroite.style.cursor = "pointer";
 for (let compte = 0; compte < slides.length; compte++) {
   const ajoutDot = slides[compte];
 }
+
+// boucle for avec compteur
+// for (let compte = 0; compte < slides.length; compte++) {
+//   const ajoutDot = slides[compte];
+// }
