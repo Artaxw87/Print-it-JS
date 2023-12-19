@@ -18,99 +18,90 @@ const slides = [
   },
 ];
 
-// let boutons = document.getElementsByClassName("arrow_left").addEventListener("click");
-
-// let btn = document.getElementById("btn-left").addEventListener("click");
-
-// console.log(btn);
-
-// document.getElementById("arrow_left").addEventListener("click", function () {
-//   alert("test1");
-// });
-
-// document.getElementById("arrow_right").addEventListener("click", function () {
-//   console.log("test2");
-// });
-
-/* ------------------- */
-// document.getElementById("arrow_left").addEventListener("click", myFunction);
-
-// function myFunction() {
-//   console.log("Gauche");
-// }
-
-// document.getElementById("arrow_left").addEventListener("click", btnRight);
-
-// function btnRight() {
-//   console.log("Droite");
-// }
-
-// console.log(slides);
-
-// console.log(slides.length);
-
-/******************************************************************************************************************************** */
-// const prev = document
-//   .querySelector(".arrow_left")
-//   .addEventListener("click", btnLeft);
-
-// const next = document
-//   .querySelector(".arrow_right")
-//   .addEventListener("click", btnRight);
-=======
-/*-----------------------------------------------------------*/
-
-// Ajoutez des écouteurs d'événements 
-document.querySelector(".arrow_left").addEventListener("click", btnLeft);
-document.querySelector(".arrow_right").addEventListener("click", btnRight);
-
-let slides = document.querySelectorAll('.slide'); // par exemple
-let numberSlides = slides.length;
-
-let nextElement = document.querySelector('.dot_selected + .dot');
-let slideDot = document.querySelector('.dot');
-
-/*-----------------------------------------------------------*/
->>>>>>> 7d4cf36fee2d70f089a5922a3b5d4602eeab4e99
-
-// let nextElement = document.querySelector(".dot_selected + .dot");
-
-// let slideDot = document.querySelector(".dot");
-
-// let numberSlides = slides.length;
-
-// console.log(numberSlides);
-
-// function btnLeft() {
-//   console.log("Left");
-// }
-
-// function btnRight() {
-//   console.log("Right");
-// }
-
-// slideDot.classList.add("dot_selected");
-
+// on selectionne les elements du DOM
 let flecheGauche = document.querySelector(".arrow_left");
 let flecheDroite = document.querySelector(".arrow_right");
+
+// on selectionne les image
+let slideImage = document.querySelector(".banner-img");
+console.log(slideImage);
+
+// on selectionne le texte du slide (tagLine)
+let slideText = document.querySelector("#banner p");
+console.log(slideText);
+
+// on selectionne la source de l'image
+let slideImageSource = slideImage.getAttribute("src");
+
 let nombreDeSlides = slides.length;
 
-flecheGauche.addEventListener("click", function () {
-  console.log("Gauche");
+/* -------------------------------------------------------------------------- */
+/*                              Partie Dynamique                              */
+/* -------------------------------------------------------------------------- */
+
+// a chaque click du bouton doite, on remplace l'image du slide avec le src de l'image suivante
+flecheDroite.addEventListener("click", () => {
+  if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
+    slideText.textContent =
+      "Tirages haute deffinition grand format pour vos bureaux et events";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
+    slideText.textContent = "Grand choix de couleurs de CMJN aux pantones";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
+    slideText.textContent = "Autocollants avec serrure laser sur mesure";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
+    slideText.textContent = "Impressions tous formats en Wales et en ligne";
+  }
 });
 
-flecheDroite.addEventListener("click", function () {
-  console.log("Droite");
+// a chaque click du bouton gauche, on fait pareille que le click du bouton droite mais en inversant la source
+flecheGauche.addEventListener("click", () => {
+  if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
+    slideText.textContent = "Autocollants avec serrure laser sur mesure";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
+    slideText.textContent = "Impressions tous formats en Wales et en ligne";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
+    slideText.textContent =
+      "Tirages haute deffinition grand format pour vos bureaux et events";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
+  }
 });
 
+// ajoute d'un pointer sur les fleches de navigation
 flecheGauche.style.cursor = "pointer";
 flecheDroite.style.cursor = "pointer";
 
+// boucle qui parcourt le tableau slides et ajoute autant de dots que de slides
 for (let compte = 0; compte < slides.length; compte++) {
   const ajoutDot = slides[compte];
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+  document.querySelector(".dots").appendChild(dot);
 }
 
-// boucle for avec compteur
-// for (let compte = 0; compte < slides.length; compte++) {
-//   const ajoutDot = slides[compte];
-// }
+// on ajoute une classe dot_selected au premier dot
+const firstDot = document.querySelector(".dot");
+firstDot.classList.add("dot_selected");
