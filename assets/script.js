@@ -34,65 +34,13 @@ console.log(slideText);
 let slideImageSource = slideImage.getAttribute("src");
 
 let nombreDeSlides = slides.length;
+// ajout d'un pointer sur les fleches de navigation
+flecheGauche.style.cursor = "pointer";
+flecheDroite.style.cursor = "pointer";
 
 /* -------------------------------------------------------------------------- */
 /*                              Partie Dynamique                              */
 /* -------------------------------------------------------------------------- */
-
-// a chaque click du bouton doite, on remplace l'image du slide avec le src de l'image suivante
-flecheDroite.addEventListener("click", () => {
-  if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
-    slideText.textContent =
-      "Tirages haute deffinition grand format pour vos bureaux et events";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
-    slideText.textContent = "Grand choix de couleurs de CMJN aux pantones";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
-    slideText.textContent = "Autocollants avec serrure laser sur mesure";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
-    slideText.textContent = "Impressions tous formats en Wales et en ligne";
-  }
-});
-
-// a chaque click du bouton gauche, on fait pareille que le click du bouton droite mais en inversant la source
-flecheGauche.addEventListener("click", () => {
-  if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
-    slideText.textContent = "Autocollants avec serrure laser sur mesure";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
-    slideText.textContent = "Impressions tous formats en Wales et en ligne";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
-    slideText.textContent =
-      "Tirages haute deffinition grand format pour vos bureaux et events";
-  } else if (
-    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
-  ) {
-    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
-  }
-});
-
-// ajoute d'un pointer sur les fleches de navigation
-flecheGauche.style.cursor = "pointer";
-flecheDroite.style.cursor = "pointer";
 
 // boucle qui parcourt le tableau slides et ajoute autant de dots que de slides
 for (let compte = 0; compte < slides.length; compte++) {
@@ -102,6 +50,82 @@ for (let compte = 0; compte < slides.length; compte++) {
   document.querySelector(".dots").appendChild(dot);
 }
 
-// on ajoute une classe dot_selected au premier dot
+/* -------------------------------------------------------------------------- */
+/*                                      d                                     */
+/* -------------------------------------------------------------------------- */
+
+// ajoute une classe dot_selected au premier dot
 const firstDot = document.querySelector(".dot");
 firstDot.classList.add("dot_selected");
+
+// boucle qui a chaque click du bouton droit, on ajoute la classe dot_selected à la classe "dot" suivante et on supprime le précédent, et ainsi de suite
+flecheDroite.addEventListener("click", () => {
+  const dots = document.querySelectorAll(".dot");
+  const selectedDot = document.querySelector(".dot_selected");
+
+  // Si aucun dot n'a la classe dot_selected, on l'ajoute au premier dot
+  if (!selectedDot) {
+    dots[0].classList.add("dot_selected");
+    return;
+  }
+
+  // On trouve l'index du dot sélectionné
+  const selectedIndex = Array.from(dots).indexOf(selectedDot);
+
+  // On supprime la classe dot_selected du dot actuel
+  selectedDot.classList.remove("dot_selected");
+
+  // On ajoute la classe dot_selected au dot suivant, ou au premier dot si on est à la fin du tableau
+  const nextIndex = (selectedIndex + 1) % dots.length;
+  dots[nextIndex].classList.add("dot_selected");
+});
+
+// boucle qui a chaque click du bouton gauche, on fait exactement la meme chose que le bouton droit mais inversement
+flecheGauche.addEventListener("click", () => {
+  const dots = document.querySelectorAll(".dot");
+  const selectedDot = document.querySelector(".dot_selected");
+
+  // Si aucun dot n'a la classe dot_selected, on l'ajoute au dernier dot
+  if (!selectedDot) {
+    dots[dots.length - 1].classList.add("dot_selected");
+    return;
+  }
+
+  // On trouve l'index du dot sélectionné
+  const selectedIndex = Array.from(dots).indexOf(selectedDot);
+
+  // On supprime la classe dot_selected du dot actuel
+  selectedDot.classList.remove("dot_selected");
+
+  // On ajoute la classe dot_selected au dot précédent, ou au dernier dot si on est au début du tableau
+  const prevIndex = (selectedIndex - 1 + dots.length) % dots.length;
+  dots[prevIndex].classList.add("dot_selected");
+});
+
+// boucle qui a chaque click du boton droit en incrementant le compteur de slide avec slideIndex++ et on remplace l'image et le tagline du slide en utilsant le tableau slides deja defini
+let slideIndex = 0;
+flecheDroite.addEventListener("click", () => {
+  slideIndex++;
+  if (slideIndex > nombreDeSlides + 1) {
+    slideIndex = 1;
+  }
+  slideImage.setAttribute(
+    "src",
+    `./assets/images/slideshow/${slides[slideIndex].image}`
+  );
+  slideText.innerHTML = slides[slideIndex].tagLine;
+  console.log(slideIndex);
+});
+
+flecheGauche.addEventListener("click", () => {
+  slideIndex--;
+  if (slideIndex > nombreDeSlides - 1) {
+    slideIndex = 1;
+  }
+  slideImage.setAttribute(
+    "src",
+    `./assets/images/slideshow/${slides[slideIndex].image}`
+  );
+  slideText.innerHTML = slides[slideIndex].tagLine;
+  console.log(slideIndex);
+});
