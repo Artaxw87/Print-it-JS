@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/*                             tableau des slides                             */
+/* -------------------------------------------------------------------------- */
+
 const slides = [
   {
     image: "slide1.jpg",
@@ -18,6 +22,10 @@ const slides = [
   },
 ];
 
+/* -------------------------------------------------------------------------- */
+/*                          declaration des variables                         */
+/* -------------------------------------------------------------------------- */
+
 // on selectionne les elements du DOM
 let flecheGauche = document.querySelector(".arrow_left");
 let flecheDroite = document.querySelector(".arrow_right");
@@ -34,6 +42,10 @@ console.log(slideText);
 let slideImageSource = slideImage.getAttribute("src");
 
 let nombreDeSlides = slides.length;
+
+// on initialise la variable slideIndex a 0 pour commencer par la premiere slide
+let slideIndex = 0;
+
 // ajout d'un pointer sur les fleches de navigation
 flecheGauche.style.cursor = "pointer";
 flecheDroite.style.cursor = "pointer";
@@ -50,82 +62,46 @@ for (let compte = 0; compte < slides.length; compte++) {
   document.querySelector(".dots").appendChild(dot);
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                      d                                     */
-/* -------------------------------------------------------------------------- */
-
-// ajoute une classe dot_selected au premier dot
+// ajoute une classe dot_selected au premier dot (par default)
 const firstDot = document.querySelector(".dot");
 firstDot.classList.add("dot_selected");
 
-// boucle qui a chaque click du bouton droit, on ajoute la classe dot_selected à la classe "dot" suivante et on supprime le précédent, et ainsi de suite
-flecheDroite.addEventListener("click", () => {
+// fonction pour mettre à jour les dots (utilisation d'une fonction pour pouvoir la réutiliser plus tard)
+function updateDots() {
   const dots = document.querySelectorAll(".dot");
-  const selectedDot = document.querySelector(".dot_selected");
+  dots.forEach((dot, index) => {
+    dot.classList.toggle("dot_selected", index === slideIndex);
+  });
+}
 
-  // Si aucun dot n'a la classe dot_selected, on l'ajoute au premier dot
-  if (!selectedDot) {
-    dots[0].classList.add("dot_selected");
-    return;
-  }
+/* -------------------------------------------------------------------------- */
+/*                             Gestion des slides                             */
+/* -------------------------------------------------------------------------- */
 
-  // On trouve l'index du dot sélectionné
-  const selectedIndex = Array.from(dots).indexOf(selectedDot);
-
-  // On supprime la classe dot_selected du dot actuel
-  selectedDot.classList.remove("dot_selected");
-
-  // On ajoute la classe dot_selected au dot suivant, ou au premier dot si on est à la fin du tableau
-  const nextIndex = (selectedIndex + 1) % dots.length;
-  dots[nextIndex].classList.add("dot_selected");
-});
-
-// boucle qui a chaque click du bouton gauche, on fait exactement la meme chose que le bouton droit mais inversement
-flecheGauche.addEventListener("click", () => {
-  const dots = document.querySelectorAll(".dot");
-  const selectedDot = document.querySelector(".dot_selected");
-
-  // Si aucun dot n'a la classe dot_selected, on l'ajoute au dernier dot
-  if (!selectedDot) {
-    dots[dots.length - 1].classList.add("dot_selected");
-    return;
-  }
-
-  // On trouve l'index du dot sélectionné
-  const selectedIndex = Array.from(dots).indexOf(selectedDot);
-
-  // On supprime la classe dot_selected du dot actuel
-  selectedDot.classList.remove("dot_selected");
-
-  // On ajoute la classe dot_selected au dot précédent, ou au dernier dot si on est au début du tableau
-  const prevIndex = (selectedIndex - 1 + dots.length) % dots.length;
-  dots[prevIndex].classList.add("dot_selected");
-});
-
-// boucle qui a chaque click du boton droit en incrementant le compteur de slide avec slideIndex++ et on remplace l'image et le tagline du slide en utilsant le tableau slides deja defini
-let slideIndex = 0;
+// Gestionnaire de clic pour la flèche droite
 flecheDroite.addEventListener("click", () => {
   slideIndex++;
-  if (slideIndex > nombreDeSlides + 1) {
-    slideIndex = 1;
+  if (slideIndex === nombreDeSlides) {
+    slideIndex = 0;
   }
-  slideImage.setAttribute(
-    "src",
-    `./assets/images/slideshow/${slides[slideIndex].image}`
-  );
-  slideText.innerHTML = slides[slideIndex].tagLine;
-  console.log(slideIndex);
+  updateSlide();
 });
 
+// Gestionnaire de clic pour la flèche gauche
 flecheGauche.addEventListener("click", () => {
   slideIndex--;
-  if (slideIndex > nombreDeSlides - 1) {
-    slideIndex = 1;
+  if (slideIndex < 0) {
+    slideIndex = nombreDeSlides - 1;
   }
+  updateSlide();
+});
+
+// Fonction pour mettre à jour l'affichage de la slide actuelle
+function updateSlide() {
   slideImage.setAttribute(
     "src",
     `./assets/images/slideshow/${slides[slideIndex].image}`
   );
   slideText.innerHTML = slides[slideIndex].tagLine;
-  console.log(slideIndex);
-});
+  updateDots();
+}
