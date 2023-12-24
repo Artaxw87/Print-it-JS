@@ -32,11 +32,9 @@ let flecheDroite = document.querySelector(".arrow_right");
 
 // on selectionne les image
 let slideImage = document.querySelector(".banner-img");
-console.log(slideImage);
 
 // on selectionne le texte du slide (tagLine)
 let slideText = document.querySelector("#banner p");
-console.log(slideText);
 
 // on selectionne la source de l'image
 let slideImageSource = slideImage.getAttribute("src");
@@ -46,7 +44,6 @@ let nombreDeSlides = slides.length;
 
 // on initialise la variable slideIndex a 0 pour commencer par la premiere slide
 let slideIndex = 0;
-
 // ajout d'un pointer sur les fleches de navigation
 flecheGauche.style.cursor = "pointer";
 flecheDroite.style.cursor = "pointer";
