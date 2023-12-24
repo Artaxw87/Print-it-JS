@@ -23,10 +23,10 @@ const slides = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*                          declaration des variables                         */
+/*                          Declaration des variables                         */
 /* -------------------------------------------------------------------------- */
 
-// on selectionne les elements du DOM
+// on selectionne les fleches qui permettent de naviguer
 let flecheGauche = document.querySelector(".arrow_left");
 let flecheDroite = document.querySelector(".arrow_right");
 
@@ -41,6 +41,7 @@ console.log(slideText);
 // on selectionne la source de l'image
 let slideImageSource = slideImage.getAttribute("src");
 
+// on selectionne le nombre de slides
 let nombreDeSlides = slides.length;
 
 // on initialise la variable slideIndex a 0 pour commencer par la premiere slide
@@ -66,9 +67,12 @@ for (let compte = 0; compte < slides.length; compte++) {
 const firstDot = document.querySelector(".dot");
 firstDot.classList.add("dot_selected");
 
-// fonction pour mettre à jour les dots (utilisation d'une fonction pour pouvoir la réutiliser plus tard)
+// Met à jour l'état des dots en fonction de l'indice de la diapositive (utilisation d'une fonction pour pouvoir la réutiliser plus tard...)
 function updateDots() {
+  // Sélectionne tous les éléments avec la classe "dot"
   const dots = document.querySelectorAll(".dot");
+
+  // Parcourt chaque dot et ajoute ou supprime la classe "dot_selected" en fonction de l'indice de la diapositive
   dots.forEach((dot, index) => {
     dot.classList.toggle("dot_selected", index === slideIndex);
   });
@@ -78,21 +82,27 @@ function updateDots() {
 /*                             Gestion des slides                             */
 /* -------------------------------------------------------------------------- */
 
-// Gestionnaire de clic pour la flèche droite
+// gestion des clic pour la flèche droite
 flecheDroite.addEventListener("click", () => {
+  // incrémente l'indice de la diapositive
   slideIndex++;
+  // si l'indice atteint le nombre total de diapositives, réinitialise à zéro
   if (slideIndex === nombreDeSlides) {
     slideIndex = 0;
   }
+  // met à jour l'affichage de la diapositive
   updateSlide();
 });
 
-// Gestionnaire de clic pour la flèche gauche
+// gestions des clic pour la flèche gauche
 flecheGauche.addEventListener("click", () => {
+  // décrémente l'indice de la diapositive
   slideIndex--;
+  // si l'indice devient négatif, réinitialise à l'indice de la dernière diapositive
   if (slideIndex < 0) {
     slideIndex = nombreDeSlides - 1;
   }
+  // met à jour l'affichage de la diapositive
   updateSlide();
 });
 
