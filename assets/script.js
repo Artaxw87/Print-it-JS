@@ -88,6 +88,7 @@ flecheDroite.addEventListener("click", () => {
     slideIndex = 0;
   }
   // met à jour l'affichage de la diapositive
+  console.log(slideIndex);
   updateSlide();
 });
 
@@ -100,6 +101,7 @@ flecheGauche.addEventListener("click", () => {
     slideIndex = nombreDeSlides - 1;
   }
   // met à jour l'affichage de la diapositive
+  console.log(slideIndex);
   updateSlide();
 });
 
