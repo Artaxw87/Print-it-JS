@@ -1,0 +1,228 @@
+// let boutons = document.getElementsByClassName("arrow_left").addEventListener("click");
+
+// let btn = document.getElementById("btn-left").addEventListener("click");
+
+// console.log(btn);
+
+// document.getElementById("arrow_left").addEventListener("click", function () {
+//   alert("test1");
+// });
+
+// document.getElementById("arrow_right").addEventListener("click", function () {
+//   console.log("test2");
+// });
+
+/* ------------------- */
+// document.getElementById("arrow_left").addEventListener("click", myFunction);
+
+// function myFunction() {
+//   console.log("Gauche");
+// }
+
+// document.getElementById("arrow_left").addEventListener("click", btnRight);
+
+// function btnRight() {
+//   console.log("Droite");
+// }
+
+// console.log(slides);
+
+// console.log(slides.length);
+
+/***********************************************
+ *        Deuxiéme Portion de code              *
+ ***********************************************/
+
+// const prev = document
+//   .querySelector(".arrow_left")
+//   .addEventListener("click", btnLeft);
+
+// const next = document
+//   .querySelector(".arrow_right")
+//   .addEventListener("click", btnRight);
+
+// let nextElement = document.querySelector(".dot_selected + .dot");
+
+// let slideDot = document.querySelector(".dot");
+
+// let numberSlides = slides.length;
+
+// console.log(numberSlides);
+
+// function btnLeft() {
+//   console.log("Left");
+// }
+
+// function btnRight() {
+//   console.log("Right");
+// }
+
+// slideDot.classList.add("dot_selected");
+
+// for (let compte = 0; compte < slides.length; compte++) {
+//   const ajoutDot = slides[compte];
+// }
+
+// boucle for avec compteur
+// for (let compte = 0; compte < slides.length; compte++) {
+//   const ajoutDot = slides[compte];
+// }
+
+// a chaque click sur la fleche droite on ajoute une classe dot_selected au dot suivant et on suprime la classe dot precedente
+flecheDroite.addEventListener("click", function () {
+  const dotSelected = document.querySelector(".dot_selected");
+  const dotSuivant = dotSelected.nextElementSibling;
+  dotSelected.classList.remove("dot_selected");
+  dotSuivant.classList.add("dot_selected");
+});
+
+/* -------------------------------------------------------------------------- */
+/*                                      s                                     */
+/* -------------------------------------------------------------------------- */
+
+// on change le text du slide avec celui du tableau a chaque click sur la fleche droite ou gauche
+flecheGauche.addEventListener("click", function () {
+  if (nombreDeSlides > 0) {
+    slideImage.setAttribute(
+      "src",
+      "./assets/images/slideshow/" + slides[0].image
+    );
+    slideText.textContent = slides[0].tagLine;
+    nombreDeSlides--;
+  }
+});
+
+flecheDroite.addEventListener("click", function () {
+  if (nombreDeSlides > 0) {
+    slideImage.setAttribute(
+      "src",
+      "./assets/images/slideshow/" + slides[0].image
+    );
+    slideText.textContent = slides[0].tagLine;
+    nombreDeSlides++;
+  }
+});
+
+// on ajoute un evenement click a la fleche droite et fleche gauche
+flecheGauche.addEventListener("click", function () {
+  console.log("Gauche");
+});
+
+flecheDroite.addEventListener("click", function () {
+  console.log("Droite");
+});
+
+/* -------------------------------------------------------------------------- */
+/*                        Facon qui marche un peu  pre                        */
+/* -------------------------------------------------------------------------- */
+
+// on remplace l'image du slide avec le src de l'image suivante
+flecheDroite.addEventListener("click", function () {
+  if (nombreDeSlides > 0) {
+    slideImage.setAttribute(
+      "src",
+      `./assets/images/slideshow/slide${nombreDeSlides}.jpg`
+    );
+    slideText.innerHTML = slides[nombreDeSlides + 1].tagLine;
+    nombreDeSlides++;
+  }
+});
+
+flecheGauche.addEventListener("click", function () {
+  if (nombreDeSlides > 0) {
+    slideImage.setAttribute(
+      "src",
+      `./assets/images/slideshow/slide${nombreDeSlides}.jpg`
+    );
+    slideText.innerHTML = slides[nombreDeSlides - 1].tagLine;
+    nombreDeSlides--;
+  }
+});
+
+/* ----------------------------------------------------- */
+
+// a chaque click du bouton doite, on remplace l'image du slide avec le src de l'image suivante
+flecheDroite.addEventListener("click", () => {
+  if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
+    slideText.innerHTML = `Tirages haute deffinition grand format <span>pour vos bureaux et events</span>`;
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
+    slideText.innerHTML = `Grand choix de couleurs <span>de CMJN aux pantones</span>`;
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
+    slideText.textContent = "Autocollants avec serrure laser sur mesure";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
+    slideText.innerHTML = `Impressions tous formats <span>en Wales et en ligne</span>`;
+  }
+});
+
+// a chaque click du bouton gauche, on fait pareille que le click du bouton droite mais en inversant la source
+flecheGauche.addEventListener("click", () => {
+  if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide1.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide4.png");
+    slideText.textContent = "Autocollants avec serrure laser sur mesure";
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide2.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide1.jpg");
+    slideText.innerHTML = `Impressions tous formats <span>en Wales et en ligne</span>`;
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide3.jpg"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide2.jpg");
+    slideText.innerHTML = `Tirages haute deffinition grand format <span>pour vos bureaux et events</span>`;
+  } else if (
+    slideImage.getAttribute("src") === "./assets/images/slideshow/slide4.png"
+  ) {
+    slideImage.setAttribute("src", "./assets/images/slideshow/slide3.jpg");
+  }
+});
+
+// boucle qui a chaque click du boton droit en incrementant le compteur de slide avec ++, et on remplace l'image et le tagline du slide en utilsant le tableau slides deja defini
+flecheGauche.addEventListener("click", () => {
+  let slideIndex = 0;
+  slideIndex++;
+  if (slideIndex > nombreDeSlides + 1) {
+    slideIndex = 0;
+  }
+  slideImage.setAttribute(
+    "src",
+    `./assets/images/slideshow/${slides[slideIndex].image}`
+  );
+  slideText.innerHTML = slides[slideIndex].tagLine;
+});
+
+// boucle qui a chaque click du boton droit en incrementant le compteur de slide avec slideIndex++ et on remplace l'image et le tagline du slide en utilsant le tableau slides deja defini
+flecheDroite.addEventListener("click", () => {
+  let slideIndex = 0;
+  slideIndex++;
+  if (slideIndex > nombreDeSlides + 1) {
+    slideIndex = 0;
+  }
+  slideImage.setAttribute(
+    "src",
+    `./assets/images/slideshow/${slides[slideIndex].image}`
+  );
+  slideText.innerHTML = slides[slideIndex].tagLine;
+  console.log(slideIndex);
+});
+
+
+ok maintent l'autre diapo, j'ai selectionner et stoker les fleche comme cela : 
+
+// on selectionne les fleches qui permettent de naviguer
+let flecheGauche = document.querySelector(".arrow_left");
+let flecheDroite = document.querySelector(".arrow_right");
+
